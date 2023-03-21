@@ -1,0 +1,21 @@
+version: "3"
+
+services:
+  ark-ded:
+    image: lyuhau/ark-ded:latest
+    build:
+      context: .
+    ulimits:
+      nofile:
+        soft: 1000000
+        hard: 1000000
+    network_mode: host
+#    ports:
+#      - 27015:27015/udp
+#      - 7777:7777/udp
+#      - 7778:7778/udp
+#      - 27020:27020/tcp
+    volumes:
+      - ./${INSTANCE}/config:/home/steam/instance
+      - ./${INSTANCE}/${SAVE}:/home/steam/Steam/steamapps/common/ARK Survival Evolved Dedicated Server/ShooterGame/Saved/SavedArks
+      - ./clusters/${CLUSTER}:/home/steam/Steam/steamapps/common/ARK Survival Evolved Dedicated Server/ShooterGame/Saved/clusters/cluster
