@@ -3,8 +3,6 @@ version: "3"
 services:
   ark-ded:
     image: lyuhau/ark-ded:latest
-    build:
-      context: .
     ulimits:
       nofile:
         soft: 1000000
