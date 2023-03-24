@@ -5,7 +5,8 @@ if [[ "$#" != "1" ]]; then
   exit 1
 fi
 
-instance_dir="$1"
+# strip any trailing slashes (for convenience when inputting)
+instance_dir="${1%/}"
 
 # Get the save directory to make sure mount works
 AltSaveDirectoryName="$(grep instance1/config/instance-opts.ini -oPe '^AltSaveDirectoryName=\K.+' || echo -n SavedArks)"
