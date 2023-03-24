@@ -1,5 +1,10 @@
 #!/usr/bin/env bash
 
+if [[ "$#" != "1" ]]; then
+  echo "Usage: ./start-server.sh [instance-folder]"
+  exit 1
+fi
+
 instance_dir="$1"
 
 # Get the save directory to make sure mount works
