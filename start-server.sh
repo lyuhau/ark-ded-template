@@ -19,8 +19,12 @@ echo "Save directory is $save_dir"
 echo "Cluster directory is $cluster_dir"
 
 # Make sure the directories exist and set them to 777 so the `steam` user inside the container has permission to save files there
-mkdir -p "$save_dir" "$cluster_dir"
-chmod 777 -R "$save_dir" "$cluster_dir"
+INSTANCE="$instance_dir" SAVE="$AltSaveDirectoryName" CLUSTER="$clusterid" docker compose config --format json \
+| jq -r '.services["ark-ded"].volumes[] | select(.read_only | not).source' \
+| while read volume; do
+  mkdir -p "$volume"
+  chown 1000:1000 -R "$volume"
+done
 
 # Start the server
 INSTANCE="$instance_dir" SAVE="$AltSaveDirectoryName" CLUSTER="$clusterid" docker-compose up -d ark-ded

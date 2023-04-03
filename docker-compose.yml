@@ -13,7 +13,11 @@ services:
 #      - 7777:7777/udp
 #      - 7778:7778/udp
 #      - 27020:27020/tcp
+    privileged: true
     volumes:
-      - ./${INSTANCE}/config:/home/steam/instance
-      - ./${INSTANCE}/${SAVE}:/home/steam/Steam/steamapps/common/ARK Survival Evolved Dedicated Server/ShooterGame/Saved/SavedArks
-      - ./clusters/${CLUSTER}:/home/steam/Steam/steamapps/common/ARK Survival Evolved Dedicated Server/ShooterGame/Saved/clusters/cluster
+      - ./${INSTANCE}/config:/mnt/ark-ded/instance/config:ro
+      - ./${INSTANCE}/${SAVE}:/mnt/ark-ded/instance/SavedArks
+      - ./clusters/${CLUSTER}:/mnt/ark-ded/common/cluster
+      - ./Config:/mnt/ark-ded/common/Config
+      - ./modlist.ini:/mnt/ark-ded/mods/modlist.ini:ro
+      - ./Mods:/mnt/ark-ded/mods/Mods
