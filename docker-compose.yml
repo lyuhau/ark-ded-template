@@ -2,6 +2,7 @@ version: "3"
 
 services:
   ark-ded:
+    container_name: ark-ded
     image: lyuhau/ark-ded:latest
     ulimits:
       nofile:
