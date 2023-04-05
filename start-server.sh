@@ -1,9 +1,18 @@
 #!/usr/bin/env bash
 
+if [[ "$#" == "0" ]]; then
+  if [[ -f ".previous_command" ]]; then
+    readarray -t a < ".previous_command"
+    set -- "${a[@]}"
+  fi
+fi
+
 if [[ "$#" != "1" ]]; then
   echo "Usage: ./start-server.sh [instance-folder]"
   exit 1
 fi
+
+printf '%s\n' "$@" >.previous_command
 
 # strip any trailing slashes (for convenience when inputting)
 instance_dir="${1%/}"
